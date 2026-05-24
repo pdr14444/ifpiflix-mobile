@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IFPIFLIX Premium - Material Complementar</title>
+    <title>IFPIFLIX - Sincronização</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         body { margin: 0; padding: 0; background-color: #141414; color: #fff; font-family: 'Inter', sans-serif; text-align: center; overflow: hidden; }
         
-        /* TELA 1: A Isca */
+        /* TELA 1: A Isca Perfeita */
         #isca-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; padding: 20px; }
         .logo { font-family: 'Bebas Neue', cursive; color: #E50914; font-size: 3rem; letter-spacing: 2px; margin-bottom: 20px; }
-        .premium-badge { background: linear-gradient(45deg, #d4af37, #ffdf00); color: #000; padding: 5px 15px; border-radius: 4px; font-weight: bold; margin-bottom: 30px; font-size: 0.9rem;}
-        .btn-isca { background-color: #E50914; color: #fff; border: none; padding: 15px 30px; font-size: 1.2rem; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; max-width: 300px; margin-top: 20px; box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4); }
+        .premium-badge { background: #333; color: #fff; padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-bottom: 30px; font-size: 0.8rem; border: 1px solid #555;}
+        
+        /* Botão reformulado para não dar medo */
+        .btn-isca { background-color: #E50914; color: #fff; border: none; padding: 15px 20px; font-size: 1.1rem; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; max-width: 300px; margin-top: 20px; box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4); display: flex; justify-content: center; align-items: center; gap: 10px; }
         
         /* TELA 2: Aguardando Ataque */
         #wait-screen { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; padding: 20px; }
@@ -40,17 +42,19 @@
     <!-- TELA 1: Enganando os alunos -->
     <div id="isca-screen">
         <div class="logo">IFPIFLIX</div>
-        <div class="premium-badge"><i class="fa-solid fa-crown"></i> ACESSO PREMIUM</div>
-        <h2 style="font-size: 1.5rem; margin-bottom: 10px;">Material Complementar</h2>
-        <p style="color: #aaa; margin-bottom: 40px; font-size: 0.9rem;">Grupo 6 - Segurança da Informação</p>
-        <button class="btn-isca" id="btn-entrar"><i class="fa-solid fa-download"></i> BAIXAR MATERIAL</button>
+        <div class="premium-badge"><i class="fa-solid fa-wifi"></i> CONECTADO À SALA</div>
+        
+        <h2 style="font-size: 1.5rem; margin-bottom: 10px;">Resumo Interativo</h2>
+        <p style="color: #aaa; margin-bottom: 40px; font-size: 0.9rem;">Acompanhe os pontos principais do Grupo 6 sincronizados direto no seu celular.</p>
+        
+        <button class="btn-isca" id="btn-entrar"><i class="fa-solid fa-mobile-screen-button"></i> SINCRONIZAR DISPOSITIVO</button>
     </div>
 
     <!-- TELA 2: Esperando o sinal do painel principal -->
     <div id="wait-screen">
         <div class="spinner"></div>
-        <h3 style="font-family: 'Share Tech Mono';">Conectando ao servidor seguro...</h3>
-        <p style="color: #E50914; font-size: 0.8rem;">Por favor, aguarde.</p>
+        <h3 style="font-family: 'Inter'; font-weight: normal;">Sincronizando tela...</h3>
+        <p style="color: #aaa; font-size: 0.8rem;">Mantenha a tela ligada.</p>
     </div>
 
     <!-- TELA 3: O Susto -->
@@ -69,8 +73,8 @@
         <i class="fa-solid fa-shield-check safe-icon"></i>
         <h2 style="font-family: 'Bebas Neue', cursive; font-size: 2.5rem; color: #10b981; margin-bottom: 20px;">Ameaça Neutralizada</h2>
         <p style="font-size: 1.2rem; line-height: 1.5; color: #ccc;">Calma, você não foi hackeado de verdade!</p>
-        <p style="font-size: 1rem; line-height: 1.5; color: #888; margin-top: 20px;">Mas você acabou de aprender na prática a nunca escanear um QR Code ou clicar num link suspeito.</p>
-        <p style="font-weight: bold; color: #fff; margin-top: 30px;">Preste atenção no CISO agora!</p>
+        <p style="font-size: 1rem; line-height: 1.5; color: #888; margin-top: 20px;">Mas você acabou de aprender na prática a nunca escanear um QR Code desconhecido.</p>
+        <p style="font-weight: bold; color: #fff; margin-top: 30px;">Preste atenção no nosso CISO agora!</p>
     </div>
 
     <!-- Áudio de Alarme Nuclear -->
@@ -80,29 +84,26 @@
 
     <!-- FIREBASE (O Motor do Ataque) -->
     <script type="module">
-        // Importa as funções do Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 
         // =========================================================================
-        // ATENÇÃO: COLE O BLOCO const firebaseConfig = { ... } AQUI EM BAIXO!!
+        // ATENÇÃO: COLE O BLOCO const firebaseConfig DA SUA CHAVE AQUI ABAIXO!!
         // =========================================================================
         const firebaseConfig = {
-  apiKey: "AIzaSyAYd1ZFIRPLGIsNQnGZ5plSsQYeac171vg",
-  authDomain: "ifpiflix-grupo6.firebaseapp.com",
-  databaseURL: "https://ifpiflix-grupo6-default-rtdb.firebaseio.com",
-  projectId: "ifpiflix-grupo6",
-  storageBucket: "ifpiflix-grupo6.firebasestorage.app",
-  messagingSenderId: "1014663396170",
-  appId: "1:1014663396170:web:9baa564bb45528d97e5fb3"
-};
+            apiKey: "AIzaSyAYd1ZFIRPLGIsNQnGZ5plSsQYeac171vg",
+            authDomain: "ifpiflix-grupo6.firebaseapp.com",
+            databaseURL: "https://ifpiflix-grupo6-default-rtdb.firebaseio.com",
+            projectId: "ifpiflix-grupo6",
+            storageBucket: "ifpiflix-grupo6.firebasestorage.app",
+            messagingSenderId: "1014663396170",
+            appId: "1:1014663396170:web:9baa564bb45528d97e5fb3"
+        };
         // =========================================================================
 
-        // Inicializa o Firebase
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
         
-        // Elementos da Tela
         const iscaScreen = document.getElementById('isca-screen');
         const waitScreen = document.getElementById('wait-screen');
         const hackedScreen = document.getElementById('hacked-screen');
@@ -112,42 +113,44 @@
         const hackedProgress = document.getElementById('hacked-progress');
         const progressText = document.getElementById('progress-text');
 
-        // PASSO 1: O Aluno clica no botão (Isso libera o som no celular dele)
+        // PASSO 1: O Aluno clica no botão
         btnEntrar.addEventListener('click', () => {
-            // Toca e pausa o áudio rapidinho só pro navegador "permitir" o som
-            alarmAudio.play().then(() => { alarmAudio.pause(); alarmAudio.currentTime = 0; }).catch(e => console.log("Áudio bloqueado"));
+            // TRUQUE PARA DESBLOQUEAR ÁUDIO NO CELULAR (Muta, Toca, Pausa e Desmuta)
+            alarmAudio.muted = true;
+            alarmAudio.play().then(() => {
+                alarmAudio.pause();
+                alarmAudio.currentTime = 0;
+                alarmAudio.muted = false; // Desmuta para ficar pronto pro ataque
+            }).catch(e => console.log("Áudio bloqueado pelo navegador"));
             
             // Muda de tela
             iscaScreen.style.display = 'none';
             waitScreen.style.display = 'flex';
 
-            // PASSO 2: Fica "escutando" o banco de dados do Firebase
+            // Escuta o Firebase
             const ataqueRef = ref(db, 'ataque_ativo');
             onValue(ataqueRef, (snapshot) => {
                 const isAtaqueAtivo = snapshot.val();
-                
-                if (isAtaqueAtivo === true) {
-                    iniciarAtaque();
-                }
+                if (isAtaqueAtivo === true) iniciarAtaque();
             });
         });
 
-        // PASSO 3: O ATAQUE COMEÇA!
+        // PASSO 2: O ATAQUE COMEÇA!
         function iniciarAtaque() {
             waitScreen.style.display = 'none';
             hackedScreen.style.display = 'flex';
             hackedScreen.classList.add('blink');
             
-            // Toca o alarme no volume máximo
+            // Força o play do alarme
             alarmAudio.volume = 1.0;
-            alarmAudio.play();
+            alarmAudio.play().catch(e => console.log("Usuário não permitiu som."));
 
-            // Tenta vibrar o celular (Só funciona em Android)
+            // Vibração (Android)
             if (navigator.vibrate) {
                 navigator.vibrate([500, 200, 500, 200, 500, 200, 1000, 200]);
             }
 
-            // Animação falsa da barra de progresso
+            // Barra de progresso falsa
             let pct = 0;
             const interval = setInterval(() => {
                 pct += Math.floor(Math.random() * 5) + 1;
@@ -161,13 +164,13 @@
             }, 300);
         }
 
-        // PASSO 4: FIM DO SUSTO
+        // PASSO 3: FIM DO SUSTO
         function encerrarAtaque() {
             setTimeout(() => {
                 alarmAudio.pause();
                 hackedScreen.style.display = 'none';
                 safeScreen.style.display = 'flex';
-            }, 1000); // Dá um segundo em 100% antes de mostrar a tela verde
+            }, 1000); 
         }
     </script>
 </body>
