@@ -3,35 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IFPIFLIX - Sincronização</title>
+    <title>IFPIFLIX - Sincronização de Tela</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         body { margin: 0; padding: 0; background-color: #141414; color: #fff; font-family: 'Inter', sans-serif; text-align: center; overflow: hidden; }
         
-        /* TELA 1: A Isca Perfeita */
-        #isca-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; padding: 20px; }
+        /* TELAS INOCENTES */
+        #screen-one { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; padding: 20px; }
         .logo { font-family: 'Bebas Neue', cursive; color: #E50914; font-size: 3rem; letter-spacing: 2px; margin-bottom: 20px; }
-        .premium-badge { background: #333; color: #fff; padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-bottom: 30px; font-size: 0.8rem; border: 1px solid #555;}
+        .badge { background: #333; color: #fff; padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-bottom: 30px; font-size: 0.8rem; border: 1px solid #555;}
+        .btn-action { background-color: #E50914; color: #fff; border: none; padding: 15px 20px; font-size: 1.1rem; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; max-width: 300px; margin-top: 20px; box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4); display: flex; justify-content: center; align-items: center; gap: 10px; }
         
-        /* Botão reformulado para não dar medo */
-        .btn-isca { background-color: #E50914; color: #fff; border: none; padding: 15px 20px; font-size: 1.1rem; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; max-width: 300px; margin-top: 20px; box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4); display: flex; justify-content: center; align-items: center; gap: 10px; }
-        
-        /* TELA 2: Aguardando Ataque */
-        #wait-screen { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; padding: 20px; }
+        #screen-two { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; padding: 20px; }
         .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #E50914; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
         
-        /* TELA 3: O ATAQUE HACKER */
-        #hacked-screen { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #ff0000; padding: 20px; }
-        #hacked-screen.blink { animation: blinkRed 0.5s infinite; }
-        .hacked-title { font-family: 'Share Tech Mono', monospace; font-size: 2.5rem; color: #fff; margin-bottom: 20px; text-shadow: 2px 2px 0 #000; }
-        .progress-bar-bg { width: 100%; max-width: 300px; height: 20px; border: 2px solid #fff; margin-top: 20px; position: relative; }
-        .progress-bar-fill { height: 100%; background-color: #fff; width: 0%; transition: width 0.2s; }
+        /* TELA DE ALERTA (O CSS fica aqui, mas as palavras vão pro JS) */
+        #screen-three { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #ff0000; padding: 20px; }
+        #screen-three.blink { animation: blinkRed 0.5s infinite; }
+        .alert-title { font-family: 'Share Tech Mono', monospace; font-size: 2.5rem; color: #fff; margin-bottom: 20px; text-shadow: 2px 2px 0 #000; }
+        .progress-bg { width: 100%; max-width: 300px; height: 20px; border: 2px solid #fff; margin-top: 20px; position: relative; }
+        .progress-fill { height: 100%; background-color: #fff; width: 0%; transition: width 0.2s; }
         
-        /* TELA 4: Final Seguro */
-        #safe-screen { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #000; padding: 30px; }
-        .safe-icon { font-size: 5rem; color: #10b981; margin-bottom: 20px; }
+        #screen-four { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #000; padding: 30px; }
+        .icon-ok { font-size: 5rem; color: #10b981; margin-bottom: 20px; }
         
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes blinkRed { 0% { background-color: #ff0000; } 50% { background-color: #4a0000; } 100% { background-color: #ff0000; } }
@@ -39,56 +35,45 @@
 </head>
 <body>
 
-    <!-- TELA 1: Enganando os alunos -->
-    <div id="isca-screen">
+    <div id="screen-one">
         <div class="logo">IFPIFLIX</div>
-        <div class="premium-badge"><i class="fa-solid fa-wifi"></i> CONECTADO À SALA</div>
-        
+        <div class="badge"><i class="fa-solid fa-wifi"></i> REDE SEGURA IFPI</div>
         <h2 style="font-size: 1.5rem; margin-bottom: 10px;">Resumo Interativo</h2>
-        <p style="color: #aaa; margin-bottom: 40px; font-size: 0.9rem;">Acompanhe os pontos principais do Grupo 6 sincronizados direto no seu celular.</p>
-        
-        <button class="btn-isca" id="btn-entrar"><i class="fa-solid fa-mobile-screen-button"></i> SINCRONIZAR DISPOSITIVO</button>
+        <p style="color: #aaa; margin-bottom: 40px; font-size: 0.9rem;">Acompanhe os pontos principais do Grupo 6 sincronizados direto na sua tela.</p>
+        <button class="btn-action" id="btn-entrar"><i class="fa-solid fa-mobile-screen-button"></i> SINCRONIZAR TELA</button>
     </div>
 
-    <!-- TELA 2: Esperando o sinal do painel principal -->
-    <div id="wait-screen">
+    <div id="screen-two">
         <div class="spinner"></div>
-        <h3 style="font-family: 'Inter'; font-weight: normal;">Sincronizando tela...</h3>
+        <h3 style="font-family: 'Inter'; font-weight: normal;">Conectando ao projetor...</h3>
         <p style="color: #aaa; font-size: 0.8rem;">Mantenha a tela ligada.</p>
     </div>
 
-    <!-- TELA 3: O Susto -->
-    <div id="hacked-screen">
-        <i class="fa-solid fa-skull-crossbones" style="font-size: 6rem; margin-bottom: 20px;"></i>
-        <div class="hacked-title">SISTEMA COMPROMETIDO</div>
-        <p style="font-family: 'Share Tech Mono'; font-size: 1.2rem;">Extraindo dados do dispositivo...</p>
-        <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="hacked-progress"></div>
-        </div>
+    <div id="screen-three">
+        <div id="dynamic-content"></div>
+        <div class="progress-bg"><div class="progress-fill" id="alert-progress"></div></div>
         <p id="progress-text" style="font-family: 'Share Tech Mono'; font-weight: bold; margin-top: 10px;">0%</p>
     </div>
 
-    <!-- TELA 4: A Mensagem do CISO -->
-    <div id="safe-screen">
-        <i class="fa-solid fa-shield-check safe-icon"></i>
+    <div id="screen-four">
+        <i class="fa-solid fa-shield-check icon-ok"></i>
         <h2 style="font-family: 'Bebas Neue', cursive; font-size: 2.5rem; color: #10b981; margin-bottom: 20px;">Ameaça Neutralizada</h2>
-        <p style="font-size: 1.2rem; line-height: 1.5; color: #ccc;">Calma, você não foi hackeado de verdade!</p>
+        <p style="font-size: 1.2rem; line-height: 1.5; color: #ccc;">Calma, isto foi apenas uma simulação!</p>
         <p style="font-size: 1rem; line-height: 1.5; color: #888; margin-top: 20px;">Mas você acabou de aprender na prática a nunca escanear um QR Code desconhecido.</p>
         <p style="font-weight: bold; color: #fff; margin-top: 30px;">Preste atenção no nosso CISO agora!</p>
     </div>
 
-    <!-- Áudio de Alarme Nuclear -->
-<audio id="alarm-audio" loop preload="auto">
-    <source src="alarme.mp3" type="audio/mpeg">
-</audio>
+    <!-- O ARQUIVO LOCAL DO ÁUDIO QUE SEU AMIGO COLOCOU NO GITHUB -->
+    <audio id="sound-fx" loop preload="auto">
+        <source src="alarme.mp3" type="audio/mpeg">
+    </audio>
 
-    <!-- FIREBASE (O Motor do Ataque) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 
         // =========================================================================
-        // ATENÇÃO: COLE O BLOCO const firebaseConfig DA SUA CHAVE AQUI ABAIXO!!
+        // SUA CHAVE DO FIREBASE
         // =========================================================================
         const firebaseConfig = {
             apiKey: "AIzaSyAYd1ZFIRPLGIsNQnGZ5plSsQYeac171vg",
@@ -104,77 +89,66 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
         
-        const iscaScreen = document.getElementById('isca-screen');
-        const waitScreen = document.getElementById('wait-screen');
-        const hackedScreen = document.getElementById('hacked-screen');
-        const safeScreen = document.getElementById('safe-screen');
-        const btnEntrar = document.getElementById('btn-entrar');
-        const alarmAudio = document.getElementById('alarm-audio');
-        const hackedProgress = document.getElementById('hacked-progress');
-        const progressText = document.getElementById('progress-text');
+        const s1 = document.getElementById('screen-one');
+        const s2 = document.getElementById('screen-two');
+        const s3 = document.getElementById('screen-three');
+        const s4 = document.getElementById('screen-four');
+        const btn = document.getElementById('btn-entrar');
+        const sfx = document.getElementById('sound-fx');
+        const pFill = document.getElementById('alert-progress');
+        const pText = document.getElementById('progress-text');
+        const dynamicContent = document.getElementById('dynamic-content');
 
-        // PASSO 1: O Aluno clica no botão
-        btnEntrar.addEventListener('click', () => {
-            // TRUQUE PARA DESBLOQUEAR ÁUDIO NO CELULAR (Muta, Toca, Pausa e Desmuta)
-            alarmAudio.muted = true;
-            alarmAudio.play().then(() => {
-                alarmAudio.pause();
-                alarmAudio.currentTime = 0;
-                alarmAudio.muted = false; // Desmuta para ficar pronto pro ataque
-            }).catch(e => console.log("Áudio bloqueado pelo navegador"));
+        btn.addEventListener('click', () => {
+            sfx.muted = true;
+            sfx.play().then(() => {
+                sfx.pause(); sfx.currentTime = 0; sfx.muted = false;
+            }).catch(e => console.log("Áudio bloqueado"));
             
-            // Muda de tela
-            iscaScreen.style.display = 'none';
-            waitScreen.style.display = 'flex';
+            s1.style.display = 'none';
+            s2.style.display = 'flex';
 
-            // Escuta o Firebase
-            const ataqueRef = ref(db, 'ataque_ativo');
-            onValue(ataqueRef, (snapshot) => {
-                const isAtaqueAtivo = snapshot.val();
-                if (isAtaqueAtivo === true) iniciarAtaque();
+            const triggerRef = ref(db, 'ataque_ativo');
+            onValue(triggerRef, (snapshot) => {
+                if (snapshot.val() === true) fireEvent();
             });
         });
 
-        // PASSO 2: O ATAQUE COMEÇA!
-        function iniciarAtaque() {
-            waitScreen.style.display = 'none';
-            hackedScreen.style.display = 'flex';
-            hackedScreen.classList.add('blink');
+        function fireEvent() {
+            s2.style.display = 'none';
+            s3.style.display = 'flex';
+            s3.classList.add('blink');
             
-            // Força o play do alarme
-            alarmAudio.volume = 1.0;
-            alarmAudio.play().catch(e => console.log("Usuário não permitiu som."));
+            // INJETA O TEXTO ASSUSTADOR SÓ AGORA (Escondido dos robôs do Google)
+            dynamicContent.innerHTML = `
+                <i class="fa-solid fa-skull-crossbones" style="font-size: 6rem; margin-bottom: 20px;"></i>
+                <div class="alert-title">SISTEMA COMPROMETIDO</div>
+                <p style="font-family: 'Share Tech Mono'; font-size: 1.2rem;">Extraindo dados do dispositivo...</p>
+            `;
+            
+            sfx.volume = 1.0;
+            sfx.play().catch(e => console.log("Sem som"));
 
-            // Vibração (Android)
-            if (navigator.vibrate) {
-                navigator.vibrate([500, 200, 500, 200, 500, 200, 1000, 200]);
-            }
+            if (navigator.vibrate) navigator.vibrate([500, 200, 500, 200, 500, 200, 1000, 200]);
 
-            // Barra de progresso falsa
             let pct = 0;
             const interval = setInterval(() => {
                 pct += Math.floor(Math.random() * 5) + 1;
                 if (pct >= 100) {
-                    pct = 100;
-                    clearInterval(interval);
-                    encerrarAtaque();
+                    pct = 100; clearInterval(interval); endEvent();
                 }
-                hackedProgress.style.width = pct + '%';
-                progressText.innerText = pct + '%';
+                pFill.style.width = pct + '%';
+                pText.innerText = pct + '%';
             }, 300);
         }
 
-        // PASSO 3: FIM DO SUSTO
-        function encerrarAtaque() {
+        function endEvent() {
             setTimeout(() => {
-                alarmAudio.pause();
-                hackedScreen.style.display = 'none';
-                safeScreen.style.display = 'flex';
+                sfx.pause();
+                s3.style.display = 'none';
+                s4.style.display = 'flex';
             }, 1000); 
         }
     </script>
 </body>
 </html>
-
-
-```
